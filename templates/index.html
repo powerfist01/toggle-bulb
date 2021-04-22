@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Bulb</title>
+    <style>
+        .container{
+            text-align: center;
+            margin-top: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bulb switch on/off</h2>
+        <img id="bulb-image" src="/static/images/pic_bulboff.gif">
+        <br>
+        <button class="button" id="toggle-btn">Toggle Button</button>
+    </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        document.getElementById("toggle-btn").addEventListener("click", async function() {
+            let bulb = document.getElementById("bulb-image");
+
+            let currentState = 'on';
+            if(bulb.src.endsWith('pic_bulboff.gif')){
+                currentState = 'off';
+            }
+            
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200){
+                    var data = JSON.parse(this.responseText);
+                    if(data['next_state'] == 'on')
+                        bulb.src = '/static/images/pic_bulbon.gif';
+                    else
+                    bulb.src = '/static/images/pic_bulboff.gif';
+                }
+            };
+            var obj = {
+                current_state: currentState
+            }
+        
+            xhr.open('POST', '/toggle', true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.send(JSON.stringify(obj));
+        });
+    </script>
+</body>
+</html>
