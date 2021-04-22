@@ -16,10 +16,8 @@ def main():
 @app.route("/toggle", methods=["POST"])
 def toggle_switch():
     
-    print(request.json)
     current_state = request.json['current_state']
     next_state = get_next_state(current_state)
-    print(current_state)
     return {
         'next_state': next_state
     }
