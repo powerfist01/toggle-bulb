@@ -46,6 +46,9 @@
         
             xhr.open('POST', 'https://toggle-bulb.herokuapp.com/toggle', true);
             xhr.setRequestHeader("Content-type", "application/json");
+
+            let Base64StringOfUserColonPassword = btoa('sujeet' + ":" + 'helloworld')
+            xhr.setRequestHeader('Authorization','Basic ' + Base64StringOfUserColonPassword);
             xhr.send(JSON.stringify(obj));
         });
     </script>
