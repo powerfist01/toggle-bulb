@@ -1,6 +1,12 @@
 from flask import Flask, request, render_template
+from flask_basicauth import BasicAuth
 
 app = Flask(__name__)
+
+app.config['BASIC_AUTH_USERNAME'] = 'sujeet'
+app.config['BASIC_AUTH_PASSWORD'] = 'helloworld'
+
+basic_auth = BasicAuth(app)
 
 def get_next_state(current_state):
     '''Toggle state'''
@@ -10,10 +16,12 @@ def get_next_state(current_state):
         return 'on'
 
 @app.route("/")
+@basic_auth.required
 def main():
     return render_template('index.html')
 
 @app.route("/toggle", methods=["POST"])
+@basic_auth.required
 def toggle_switch():
     
     current_state = request.json['current_state']
