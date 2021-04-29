@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template
 from flask_basicauth import BasicAuth
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app) # This will enable CORS for all routes
 
 app.config['BASIC_AUTH_USERNAME'] = 'sujeet'
 app.config['BASIC_AUTH_PASSWORD'] = 'helloworld'
