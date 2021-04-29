@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <h2>Bulb switch on/off</h2>
-        <img id="bulb-image" src="/static/images/pic_bulboff.gif">
+        <img id="bulb-image" src="https://toggle-bulb.herokuapp.com/static/images/pic_bulboff.gif">
         <br>
         <button class="button" id="toggle-btn">Toggle Button</button>
     </div>
@@ -35,16 +35,16 @@
                 if (this.readyState == 4 && this.status == 200){
                     var data = JSON.parse(this.responseText);
                     if(data['next_state'] == 'on')
-                        bulb.src = '/static/images/pic_bulbon.gif';
+                        bulb.src = 'https://toggle-bulb.herokuapp.com/static/images/pic_bulbon.gif';
                     else
-                    bulb.src = '/static/images/pic_bulboff.gif';
+                    bulb.src = 'https://toggle-bulb.herokuapp.com/static/images/pic_bulboff.gif';
                 }
             };
             var obj = {
                 current_state: currentState
             }
         
-            xhr.open('POST', '/toggle', true);
+            xhr.open('POST', 'https://toggle-bulb.herokuapp.com/toggle', true);
             xhr.setRequestHeader("Content-type", "application/json");
             xhr.send(JSON.stringify(obj));
         });
