@@ -23,6 +23,11 @@ def get_next_state(current_state):
 def main():
     return render_template('index.html')
 
+@app.route("/tree")
+@basic_auth.required
+def chart():
+    return render_template('d3chart.html')
+
 @app.route("/toggle", methods=["POST"])
 @basic_auth.required
 def toggle_switch():
