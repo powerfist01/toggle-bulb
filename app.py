@@ -33,6 +33,11 @@ def chart():
 def circle():
     return render_template('d3circle.html')
 
+@app.route("/element")
+@basic_auth.required
+def element():
+    return render_template('element.html')
+
 @app.route("/toggle", methods=["POST"])
 @basic_auth.required
 def toggle_switch():
